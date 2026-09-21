@@ -5,12 +5,19 @@ Locomotion reinforcement learning on [mjlab](https://github.com/mujocolab/mjlab)
 robot registry, and train/play tooling built on mjlab and
 [rsl_rl](https://github.com/leggedrobotics/rsl_rl) PPO.
 
-This release includes the **SvanM2** quadruped on flat terrain.
+This release includes the **SvanM2** quadruped on flat and complex terrain.
 
-> A **pretrained flat policy ships** under `checkpoints/svanm2_flat/`
-> (`svanm2_flat.pt` for play, `policy.onnx` for deployment). You can `play` it
-> immediately, or train your own. See `MODEL_CARD.md` for provenance and
-> evaluation.
+> **Pretrained policies shipped under `checkpoints/`**:
+> - `checkpoints/svanm2_flat/`: Standard velocity-tracking flat policy.
+> - `checkpoints/svanm2_himloco/`: HIMLoco 20,000-update high-speed terrain policy.
+> - `checkpoints/svanm2_moe/`: MoE-CTS 90,000-update multi-terrain student policy.
+>
+> **Interactive Stair Simulation**:
+> Run the real-time interactive multi-stair evaluation environment (10cm, 12cm, 14cm, 15cm, 16cm, 20cm stairs $\times$ 12 steps each + turnaround platforms):
+> ```bash
+> python scripts/stair_simulation/run_interactive_sim.py
+> ```
+> See `MODEL_CARD.md` for provenance and evaluation details.
 
 ## Steps at a glance
 

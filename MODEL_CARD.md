@@ -63,9 +63,42 @@ nominal height across all commands.
 
 ## Known limitations
 
-- **Flat terrain only** — no rough/stairs.
+- **Flat terrain only** — (for `svanm2_flat`) no rough/stairs.
 - **Angular undershoot** — yaw-rate commands settle a little below target.
-- **Not hardware-validated** — simulation only.
+- **Not hardware-validated** — (`svanm2_flat`) simulation only.
+
+---
+
+# Model card — SvanM2 HIMLoco policy (mjlab)
+
+A high-speed terrain locomotion policy trained with the HIMLoco estimator-actor architecture, shipped under `checkpoints/svanm2_himloco/`.
+
+## Overview
+- **Task:** Native MuJoCo SvanM2 terrain locomotion (flat, stairs, slopes).
+- **Robot:** SvanM2 quadruped, 12 DoF.
+- **Algorithm:** HIMLoco (temporal convolutional estimator + PPO actor), 20,000 updates.
+- **Interfaces:** 6-frame history of 45-dim observations (270 dims total) $\to$ 12 raw joint actions.
+- **Artifacts:**
+  - `model_20000.pt` (PyTorch state dict)
+  - `policy.onnx` (ONNX export)
+  - `offline_inference.ts` (TorchScript export)
+  - `env.yaml` (training configuration)
+
+---
+
+# Model card — SvanM2 MoE-CTS policy (mjlab)
+
+A multi-terrain locomotion policy trained with Mixture of Experts Concurrent Teacher-Student (MoE-CTS), shipped under `checkpoints/svanm2_moe/`.
+
+## Overview
+- **Task:** Native MuJoCo SvanM2 terrain locomotion (flat, stairs, slopes).
+- **Robot:** SvanM2 quadruped, 12 DoF.
+- **Algorithm:** MoE-CTS (8 concurrent latent experts, teacher/student distillation with load balancing), 90,000 updates. Selected as best-performing reference from multi-seed benchmarking (643/720 qualified passes).
+- **Interfaces:** 5-frame history of 45-dim observations (225 dims total) $\to$ 12 raw joint actions.
+- **Artifacts:**
+  - `model_90000.pt` (PyTorch state dict)
+  - `policy.onnx` (ONNX export)
+  - `offline_inference.ts` (TorchScript export)
 
 ## Provenance & license
 

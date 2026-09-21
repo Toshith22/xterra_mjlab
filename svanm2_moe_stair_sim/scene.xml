@@ -1,0 +1,231 @@
+<mujoco model="svanm2_description">
+  <compiler angle="radian" meshdir="../xterra_mjlab/assets/svanm2/meshes" autolimits="true" />
+
+  <option cone="elliptic" impratio="100" timestep="0.005" integrator="implicitfast" iterations="20" ls_iterations="20" />
+
+  <default>
+    <default class="svanm2">
+      <geom friction="0.6" margin="0" condim="1" />
+      <joint axis="0 1 0" damping="0.1" armature="0.01" frictionloss="0.2" />
+      <motor ctrlrange="-11.9 11.9" />
+      <default class="abduction">
+        <joint axis="1 0 0" range="-1.0472 1.0472" />
+      </default>
+      <default class="hip">
+        <default class="front_hip">
+          <joint range="-1.5708 3.4907" />
+        </default>
+        <default class="back_hip">
+          <joint range="-0.5236 4.5379" />
+        </default>
+      </default>
+      <default class="knee">
+        <joint range="-2.7227 -0.83776" />
+        <motor ctrlrange="-22 22" />
+      </default>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2" />
+      </default>
+      <default class="collision">
+        <geom group="3" />
+        <default class="foot">
+        
+          <geom size="0.022" pos="-0.002 0 -0.1915" priority="1" solimp="0.015 1 0.01" condim="6" solref="0.01 1" friction="0.8 0.02 0.01" />
+        </default>
+      </default>
+    </default>
+  </default>
+  <compiler angle="radian" />
+
+  <asset>
+    <material name="black" rgba="0 0 0 1" />
+
+    <mesh name="torso" file="torso.STL" />
+    <mesh name="FL_hip" file="FL_hip.STL" />
+    <mesh name="FL_thigh" file="FL_thigh.STL" />
+    <mesh name="FL_calf" file="FL_calf.STL" />
+    <mesh name="FL_foot" file="FL_foot.STL" />
+    <mesh name="FR_hip" file="FR_hip.STL" />
+    <mesh name="FR_thigh" file="FR_thigh.STL" />
+    <mesh name="FR_calf" file="FR_calf.STL" />
+    <mesh name="FR_foot" file="FR_foot.STL" />
+    <mesh name="RL_hip" file="RL_hip.STL" />
+    <mesh name="RL_thigh" file="RL_thigh.STL" />
+    <mesh name="RL_calf" file="RL_calf.STL" />
+    <mesh name="RL_foot" file="RL_foot.STL" />
+    <mesh name="RR_hip" file="RR_hip.STL" />
+    <mesh name="RR_thigh" file="RR_thigh.STL" />
+    <mesh name="RR_calf" file="RR_calf.STL" />
+    <mesh name="RR_foot" file="RR_foot.STL" />
+  <texture type="skybox" builtin="gradient" rgb1="0.35 0.55 0.75" rgb2="0.1 0.15 0.2" width="512" height="512" /><texture type="2d" name="grid_plane" builtin="checker" mark="edge" rgb1="0.22 0.25 0.28" rgb2="0.16 0.18 0.20" markrgb="0.45 0.50 0.55" width="300" height="300" /><material name="ground_mat" texture="grid_plane" texuniform="true" texrepeat="40 40" reflectance="0.15" /><texture type="2d" name="runway_tex" builtin="flat" rgb1="0.30 0.32 0.35" rgb2="0.30 0.32 0.35" width="64" height="64" /><material name="runway_mat" texture="runway_tex" reflectance="0.05" /></asset>
+
+  
+  
+
+  <worldbody>
+    <body name="base" pos="-1.500 -9.500 0.365" childclass="svanm2">
+      <site name="base" pos="0 0 0" />
+      <site name="imu" pos="0 0 0" /> 
+      <inertial pos="0.00521401 -0.00155277 -0.00229456" quat="0.497786 0.502149 -0.498702 0.50135" mass="4.35875" diaginertia="0.0107039 0.00839016 0.00739324" />
+      <joint name="floating_base" type="free" limited="false" actuatorfrclimited="false" />
+      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.024 0.251 0.169 1" mesh="torso" />
+      <geom type="mesh" rgba="0.024 0.251 0.169 1" mesh="torso" group="3" />
+
+      
+      
+      
+
+      <body name="FL_hip_link" pos="0.147 0.06 0.00025">
+        <inertial pos="0.0424482 0.0775888 0.000761259" quat="0.705211 -0.0197743 -0.0198745 0.708443" mass="1.17556" diaginertia="0.000755934 0.000456006 0.000436035" />
+        <joint name="FL_hip_joint" pos="0 0 0" axis="1 0 0" limited="true" range="-1.04720 1.04720" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.35 0.35 0.35 1" mesh="FL_hip" />
+        <geom type="mesh" rgba="0.35 0.35 0.35 1" mesh="FL_hip" group="3" />
+        <body name="FL_thigh_link" pos="0.043751 0.0811 0">
+          <inertial pos="4.17773e-06 -0.000648504 -0.0724656" quat="0.707106 0.00066984 -0.000675467 0.707106" mass="0.15438" diaginertia="0.00062189 0.000598625 2.73013e-05" />
+          <joint name="FL_thigh_joint" pos="0 0 0" axis="0 1 0" limited="true" range="-1.57080 3.49070" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.55 0.55 0.55 1" mesh="FL_thigh" />
+          <geom type="mesh" rgba="0.55 0.55 0.55 1" mesh="FL_thigh" group="3" />
+          <body name="FL_shank_link" pos="0 0 -0.1915">
+            <inertial pos="-0.0028694 4.37021e-05 -0.10682" quat="0.707238 -0.0055325 -0.00597674 0.706929" mass="0.0947423" diaginertia="0.000557178 0.00054772 1.54606e-05" />
+            <joint name="FL_calf_joint" pos="0 0 0" axis="0 1 0" limited="true" range="-2.72270 0.50000" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.55 0.55 0.55 1" mesh="FL_calf" />
+            <geom type="mesh" rgba="0.55 0.55 0.55 1" mesh="FL_calf" group="3" />
+            
+            <geom pos="-0.0035143 0 -0.1901" mesh="FL_foot" class="visual" material="black" />
+            <geom name="FL_foot" class="foot" condim="3" priority="1" friction="0.85 0.01 0.001" contype="1" conaffinity="1" solimp="0.9 0.95 0.001" solref="0.002 1" />
+            <site name="FL_foot" pos="-0.0035143 0 -0.1901" />
+          </body>
+        </body>
+      </body>
+      <body name="FR_hip_link" pos="0.147 -0.06 0.00025">
+        <inertial pos="0.0421173 -0.0775888 0.000761259" quat="0.70848 0.0198533 0.0197931 0.705173" mass="1.17556" diaginertia="0.000755934 0.000456005 0.000436035" />
+        <joint name="FR_hip_joint" pos="0 0 0" axis="1 0 0" range="-1.04720 1.04720" limited="true" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.35 0.35 0.35 1" mesh="FR_hip" />
+        <geom type="mesh" rgba="0.35 0.35 0.35 1" mesh="FR_hip" group="3" />
+        <body name="FR_thigh_link" pos="0.043751 -0.0811 0">
+          <inertial pos="-4.17773e-06 0.000648504 -0.0724656" quat="0.707106 -0.00066984 0.000675467 0.707106" mass="0.15438" diaginertia="0.00062189 0.000598625 2.73013e-05" />
+          <joint name="FR_thigh_joint" pos="0 0 0" axis="0 1 0" range="-1.57080 3.49070" limited="true" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.55 0.55 0.55 1" mesh="FR_thigh" />
+          <geom type="mesh" rgba="0.55 0.55 0.55 1" mesh="FR_thigh" group="3" />
+          <body name="FR_shank_link" pos="0 0 -0.1915">
+            <inertial pos="-0.0028694 4.37021e-05 -0.10682" quat="0.707238 -0.0055325 -0.00597674 0.706929" mass="0.0947423" diaginertia="0.000557178 0.00054772 1.54606e-05" />
+            <joint name="FR_calf_joint" pos="0 0 0" axis="0 1 0" range="-2.72270 0.50000" limited="true" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.55 0.55 0.55 1" mesh="FR_calf" />
+            <geom type="mesh" rgba="0.55 0.55 0.55 1" mesh="FR_calf" group="3" />
+            
+            <geom pos="-0.0035143 0 -0.1901" mesh="FR_foot" class="visual" material="black" />
+            <geom name="FR_foot" class="foot" condim="3" priority="1" friction="0.85 0.01 0.001" contype="1" conaffinity="1" solimp="0.9 0.95 0.001" solref="0.002 1" />
+            <site name="FR_foot" pos="-0.0035143 0 -0.1901" />
+          </body>
+        </body>
+      </body>
+      <body name="RL_hip_link" pos="-0.147 0.06 0.00025">
+        <inertial pos="-0.0424482 0.0782212 0.000761259" quat="0.70848 0.0198533 0.0197931 0.705173" mass="1.17556" diaginertia="0.000755934 0.000456005 0.000436035" />
+        <joint name="RL_hip_joint" pos="0 0 0" axis="1 0 0" range="-1.04720 1.04720" limited="true" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.35 0.35 0.35 1" mesh="RL_hip" />
+        <geom type="mesh" rgba="0.35 0.35 0.35 1" mesh="RL_hip" group="3" />
+        <body name="RL_thigh_link" pos="-0.043751 0.0796 0">
+          <inertial pos="-4.17773e-06 0.000648504 -0.0724656" quat="0.707106 -0.00066984 0.000675467 0.707106" mass="0.15438" diaginertia="0.00062189 0.000598625 2.73013e-05" />
+          <joint name="RL_thigh_joint" pos="0 0 0" axis="0 1 0" range="-0.52360 4.53790" limited="true" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.55 0.55 0.55 1" mesh="RL_thigh" />
+          <geom type="mesh" rgba="0.55 0.55 0.55 1" mesh="RL_thigh" group="3" />
+          <body name="RL_shank_link" pos="0 0 -0.1915">
+            <inertial pos="-0.0028694 4.37021e-05 -0.10682" quat="0.707238 -0.0055325 -0.00597674 0.706929" mass="0.0947423" diaginertia="0.000557178 0.00054772 1.54606e-05" />
+            <joint name="RL_calf_joint" pos="0 0 0" axis="0 1 0" range="-2.72270 0.50000" limited="true" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.55 0.55 0.55 1" mesh="RL_calf" />
+            <geom type="mesh" rgba="0.55 0.55 0.55 1" mesh="RL_calf" group="3" />
+            
+            <geom pos="-0.0035143 0 -0.1901" mesh="RL_foot" class="visual" material="black" />
+            <geom name="RL_foot" class="foot" condim="3" priority="1" friction="0.85 0.01 0.001" contype="1" conaffinity="1" solimp="0.9 0.95 0.001" solref="0.002 1" />
+            <site name="RL_foot" pos="-0.0035143 0 -0.1901" />
+          </body>
+        </body>
+      </body>
+      <body name="RR_hip_link" pos="-0.147 -0.06 0.00025">
+        <inertial pos="-0.0424482 -0.0775888 0.000761259" quat="0.705211 0.0197743 0.0198745 0.708443" mass="1.17556" diaginertia="0.000755934 0.000456006 0.000436035" />
+        <joint name="RR_hip_joint" pos="0 0 0" axis="1 0 0" range="-1.04720 1.04720" limited="true" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.35 0.35 0.35 1" mesh="RR_hip" />
+        <geom type="mesh" rgba="0.35 0.35 0.35 1" mesh="RR_hip" group="3" />
+        <body name="RR_thigh_link" pos="-0.043751 -0.0811 0">
+          <inertial pos="-4.17773e-06 0.000648504 -0.0724656" quat="0.707106 -0.00066984 0.000675467 0.707106" mass="0.15438" diaginertia="0.00062189 0.000598625 2.73013e-05" />
+          <joint name="RR_thigh_joint" pos="0 0 0" axis="0 1 0" range="-0.52360 4.53790" limited="true" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.55 0.55 0.55 1" mesh="RR_thigh" />
+          <geom type="mesh" rgba="0.55 0.55 0.55 1" mesh="RR_thigh" group="3" />
+          <body name="RR_shank_link" pos="0 0 -0.1915">
+            <inertial pos="-0.0028694 4.37021e-05 -0.10682" quat="0.707238 -0.0055325 -0.00597674 0.706929" mass="0.0947423" diaginertia="0.000557178 0.00054772 1.54606e-05" />
+            <joint name="RR_calf_joint" pos="0 0 0" axis="0 1 0" range="-2.72270 0.50000" limited="true" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.55 0.55 0.55 1" mesh="RR_calf" />
+            <geom type="mesh" rgba="0.55 0.55 0.55 1" mesh="RR_calf" group="3" />
+            
+            <geom pos="-0.0035143 0 -0.1901" mesh="RR_foot" class="visual" material="black" />
+            <geom name="RR_foot" class="foot" condim="3" priority="1" friction="0.85 0.01 0.001" contype="1" conaffinity="1" solimp="0.9 0.95 0.001" solref="0.002 1" />
+            <site name="RR_foot" pos="-0.0035143 0 -0.1901" />
+          </body>
+        </body>
+      </body>
+    </body>
+  <light name="sun1" pos="5 0 6" dir="-0.5 0 -1" diffuse="0.75 0.75 0.75" ambient="0.28 0.28 0.28" specular="0.1 0.1 0.1" directional="true" /><light name="sun2" pos="-5 0 6" dir="0.5 0 -1" diffuse="0.45 0.45 0.45" specular="0 0 0" directional="true" /><geom name="floor" type="plane" size="80 80 0.1" pos="0 0 0" material="ground_mat" friction="0.8 0.005 0.0001" condim="3" /><body name="track_1_10cm" pos="0 -9.500 0"><geom name="runway_1" type="box" size="2.000 1.200 0.001" pos="-2.000 0 0.001" material="runway_mat" contype="0" conaffinity="0" /><geom name="marker_L_1" type="cylinder" size="0.10 0.40" pos="-2.5 -1.320 0.40" rgba="0.150 0.550 0.800 1.000" contype="0" conaffinity="0" /><geom name="marker_R_1" type="cylinder" size="0.10 0.40" pos="-2.5 1.320 0.40" rgba="0.150 0.550 0.800 1.000" contype="0" conaffinity="0" /><geom name="banner_1" type="box" size="0.08 1.320 0.12" pos="-2.5 0 0.85" rgba="0.150 0.550 0.800 1.000" contype="0" conaffinity="0" /><geom name="step_1_1" type="box" size="0.1500 1.0000 0.0500" pos="0.1500 0 0.0500" rgba="0.250 0.650 0.900 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_2" type="box" size="0.1500 1.0000 0.1000" pos="0.4500 0 0.1000" rgba="0.150 0.550 0.800 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_3" type="box" size="0.1500 1.0000 0.1500" pos="0.7500 0 0.1500" rgba="0.250 0.650 0.900 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_4" type="box" size="0.1500 1.0000 0.2000" pos="1.0500 0 0.2000" rgba="0.150 0.550 0.800 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_5" type="box" size="0.1500 1.0000 0.2500" pos="1.3500 0 0.2500" rgba="0.250 0.650 0.900 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_6" type="box" size="0.1500 1.0000 0.3000" pos="1.6500 0 0.3000" rgba="0.150 0.550 0.800 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_7" type="box" size="0.1500 1.0000 0.3500" pos="1.9500 0 0.3500" rgba="0.250 0.650 0.900 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_8" type="box" size="0.1500 1.0000 0.4000" pos="2.2500 0 0.4000" rgba="0.150 0.550 0.800 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_9" type="box" size="0.1500 1.0000 0.4500" pos="2.5500 0 0.4500" rgba="0.250 0.650 0.900 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_10" type="box" size="0.1500 1.0000 0.5000" pos="2.8500 0 0.5000" rgba="0.150 0.550 0.800 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_11" type="box" size="0.1500 1.0000 0.5500" pos="3.1500 0 0.5500" rgba="0.250 0.650 0.900 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_1_12" type="box" size="0.1500 1.0000 0.6000" pos="3.4500 0 0.6000" rgba="0.150 0.550 0.800 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="platform_1" type="box" size="1.500 1.200 0.6000" pos="5.1000 0 0.6000" rgba="0.090 0.330 0.480 1.0" friction="0.90 0.005 0.0001" condim="3" /><geom name="curb_L_1" type="box" size="1.500 0.04 0.040" pos="5.1000 -1.240 1.240" rgba="0.150 0.550 0.800 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_R_1" type="box" size="1.500 0.04 0.040" pos="5.1000 1.240 1.240" rgba="0.150 0.550 0.800 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_back_1" type="box" size="0.06 1.280 0.040" pos="6.660 0 1.240" rgba="0.150 0.550 0.800 1.000" friction="0.4 0.001 0.0001" condim="3" /></body><body name="track_2_12cm" pos="0 -5.700 0"><geom name="runway_2" type="box" size="2.000 1.200 0.001" pos="-2.000 0 0.001" material="runway_mat" contype="0" conaffinity="0" /><geom name="marker_L_2" type="cylinder" size="0.10 0.40" pos="-2.5 -1.320 0.40" rgba="0.100 0.650 0.600 1.000" contype="0" conaffinity="0" /><geom name="marker_R_2" type="cylinder" size="0.10 0.40" pos="-2.5 1.320 0.40" rgba="0.100 0.650 0.600 1.000" contype="0" conaffinity="0" /><geom name="banner_2" type="box" size="0.08 1.320 0.12" pos="-2.5 0 0.85" rgba="0.100 0.650 0.600 1.000" contype="0" conaffinity="0" /><geom name="step_2_1" type="box" size="0.1500 1.0000 0.0600" pos="0.1500 0 0.0600" rgba="0.200 0.750 0.700 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_2" type="box" size="0.1500 1.0000 0.1200" pos="0.4500 0 0.1200" rgba="0.100 0.650 0.600 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_3" type="box" size="0.1500 1.0000 0.1800" pos="0.7500 0 0.1800" rgba="0.200 0.750 0.700 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_4" type="box" size="0.1500 1.0000 0.2400" pos="1.0500 0 0.2400" rgba="0.100 0.650 0.600 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_5" type="box" size="0.1500 1.0000 0.3000" pos="1.3500 0 0.3000" rgba="0.200 0.750 0.700 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_6" type="box" size="0.1500 1.0000 0.3600" pos="1.6500 0 0.3600" rgba="0.100 0.650 0.600 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_7" type="box" size="0.1500 1.0000 0.4200" pos="1.9500 0 0.4200" rgba="0.200 0.750 0.700 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_8" type="box" size="0.1500 1.0000 0.4800" pos="2.2500 0 0.4800" rgba="0.100 0.650 0.600 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_9" type="box" size="0.1500 1.0000 0.5400" pos="2.5500 0 0.5400" rgba="0.200 0.750 0.700 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_10" type="box" size="0.1500 1.0000 0.6000" pos="2.8500 0 0.6000" rgba="0.100 0.650 0.600 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_11" type="box" size="0.1500 1.0000 0.6600" pos="3.1500 0 0.6600" rgba="0.200 0.750 0.700 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_2_12" type="box" size="0.1500 1.0000 0.7200" pos="3.4500 0 0.7200" rgba="0.100 0.650 0.600 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="platform_2" type="box" size="1.500 1.200 0.7200" pos="5.1000 0 0.7200" rgba="0.060 0.390 0.360 1.0" friction="0.90 0.005 0.0001" condim="3" /><geom name="curb_L_2" type="box" size="1.500 0.04 0.040" pos="5.1000 -1.240 1.480" rgba="0.100 0.650 0.600 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_R_2" type="box" size="1.500 0.04 0.040" pos="5.1000 1.240 1.480" rgba="0.100 0.650 0.600 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_back_2" type="box" size="0.06 1.280 0.040" pos="6.660 0 1.480" rgba="0.100 0.650 0.600 1.000" friction="0.4 0.001 0.0001" condim="3" /></body><body name="track_3_14cm" pos="0 -1.900 0"><geom name="runway_3" type="box" size="2.000 1.200 0.001" pos="-2.000 0 0.001" material="runway_mat" contype="0" conaffinity="0" /><geom name="marker_L_3" type="cylinder" size="0.10 0.40" pos="-2.5 -1.320 0.40" rgba="0.200 0.700 0.300 1.000" contype="0" conaffinity="0" /><geom name="marker_R_3" type="cylinder" size="0.10 0.40" pos="-2.5 1.320 0.40" rgba="0.200 0.700 0.300 1.000" contype="0" conaffinity="0" /><geom name="banner_3" type="box" size="0.08 1.320 0.12" pos="-2.5 0 0.85" rgba="0.200 0.700 0.300 1.000" contype="0" conaffinity="0" /><geom name="step_3_1" type="box" size="0.1500 1.0000 0.0700" pos="0.1500 0 0.0700" rgba="0.300 0.800 0.400 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_2" type="box" size="0.1500 1.0000 0.1400" pos="0.4500 0 0.1400" rgba="0.200 0.700 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_3" type="box" size="0.1500 1.0000 0.2100" pos="0.7500 0 0.2100" rgba="0.300 0.800 0.400 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_4" type="box" size="0.1500 1.0000 0.2800" pos="1.0500 0 0.2800" rgba="0.200 0.700 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_5" type="box" size="0.1500 1.0000 0.3500" pos="1.3500 0 0.3500" rgba="0.300 0.800 0.400 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_6" type="box" size="0.1500 1.0000 0.4200" pos="1.6500 0 0.4200" rgba="0.200 0.700 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_7" type="box" size="0.1500 1.0000 0.4900" pos="1.9500 0 0.4900" rgba="0.300 0.800 0.400 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_8" type="box" size="0.1500 1.0000 0.5600" pos="2.2500 0 0.5600" rgba="0.200 0.700 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_9" type="box" size="0.1500 1.0000 0.6300" pos="2.5500 0 0.6300" rgba="0.300 0.800 0.400 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_10" type="box" size="0.1500 1.0000 0.7000" pos="2.8500 0 0.7000" rgba="0.200 0.700 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_11" type="box" size="0.1500 1.0000 0.7700" pos="3.1500 0 0.7700" rgba="0.300 0.800 0.400 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_3_12" type="box" size="0.1500 1.0000 0.8400" pos="3.4500 0 0.8400" rgba="0.200 0.700 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="platform_3" type="box" size="1.500 1.200 0.8400" pos="5.1000 0 0.8400" rgba="0.120 0.420 0.180 1.0" friction="0.90 0.005 0.0001" condim="3" /><geom name="curb_L_3" type="box" size="1.500 0.04 0.040" pos="5.1000 -1.240 1.720" rgba="0.200 0.700 0.300 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_R_3" type="box" size="1.500 0.04 0.040" pos="5.1000 1.240 1.720" rgba="0.200 0.700 0.300 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_back_3" type="box" size="0.06 1.280 0.040" pos="6.660 0 1.720" rgba="0.200 0.700 0.300 1.000" friction="0.4 0.001 0.0001" condim="3" /></body><body name="track_4_15cm" pos="0 1.900 0"><geom name="runway_4" type="box" size="2.000 1.200 0.001" pos="-2.000 0 0.001" material="runway_mat" contype="0" conaffinity="0" /><geom name="marker_L_4" type="cylinder" size="0.10 0.40" pos="-2.5 -1.320 0.40" rgba="0.900 0.550 0.100 1.000" contype="0" conaffinity="0" /><geom name="marker_R_4" type="cylinder" size="0.10 0.40" pos="-2.5 1.320 0.40" rgba="0.900 0.550 0.100 1.000" contype="0" conaffinity="0" /><geom name="banner_4" type="box" size="0.08 1.320 0.12" pos="-2.5 0 0.85" rgba="0.900 0.550 0.100 1.000" contype="0" conaffinity="0" /><geom name="step_4_1" type="box" size="0.1500 1.0000 0.0750" pos="0.1500 0 0.0750" rgba="0.950 0.650 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_2" type="box" size="0.1500 1.0000 0.1500" pos="0.4500 0 0.1500" rgba="0.900 0.550 0.100 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_3" type="box" size="0.1500 1.0000 0.2250" pos="0.7500 0 0.2250" rgba="0.950 0.650 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_4" type="box" size="0.1500 1.0000 0.3000" pos="1.0500 0 0.3000" rgba="0.900 0.550 0.100 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_5" type="box" size="0.1500 1.0000 0.3750" pos="1.3500 0 0.3750" rgba="0.950 0.650 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_6" type="box" size="0.1500 1.0000 0.4500" pos="1.6500 0 0.4500" rgba="0.900 0.550 0.100 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_7" type="box" size="0.1500 1.0000 0.5250" pos="1.9500 0 0.5250" rgba="0.950 0.650 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_8" type="box" size="0.1500 1.0000 0.6000" pos="2.2500 0 0.6000" rgba="0.900 0.550 0.100 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_9" type="box" size="0.1500 1.0000 0.6750" pos="2.5500 0 0.6750" rgba="0.950 0.650 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_10" type="box" size="0.1500 1.0000 0.7500" pos="2.8500 0 0.7500" rgba="0.900 0.550 0.100 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_11" type="box" size="0.1500 1.0000 0.8250" pos="3.1500 0 0.8250" rgba="0.950 0.650 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_4_12" type="box" size="0.1500 1.0000 0.9000" pos="3.4500 0 0.9000" rgba="0.900 0.550 0.100 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="platform_4" type="box" size="1.500 1.200 0.9000" pos="5.1000 0 0.9000" rgba="0.540 0.330 0.060 1.0" friction="0.90 0.005 0.0001" condim="3" /><geom name="curb_L_4" type="box" size="1.500 0.04 0.040" pos="5.1000 -1.240 1.840" rgba="0.900 0.550 0.100 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_R_4" type="box" size="1.500 0.04 0.040" pos="5.1000 1.240 1.840" rgba="0.900 0.550 0.100 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_back_4" type="box" size="0.06 1.280 0.040" pos="6.660 0 1.840" rgba="0.900 0.550 0.100 1.000" friction="0.4 0.001 0.0001" condim="3" /></body><body name="track_5_16cm" pos="0 5.700 0"><geom name="runway_5" type="box" size="2.000 1.200 0.001" pos="-2.000 0 0.001" material="runway_mat" contype="0" conaffinity="0" /><geom name="marker_L_5" type="cylinder" size="0.10 0.40" pos="-2.5 -1.320 0.40" rgba="0.850 0.300 0.200 1.000" contype="0" conaffinity="0" /><geom name="marker_R_5" type="cylinder" size="0.10 0.40" pos="-2.5 1.320 0.40" rgba="0.850 0.300 0.200 1.000" contype="0" conaffinity="0" /><geom name="banner_5" type="box" size="0.08 1.320 0.12" pos="-2.5 0 0.85" rgba="0.850 0.300 0.200 1.000" contype="0" conaffinity="0" /><geom name="step_5_1" type="box" size="0.1500 1.0000 0.0800" pos="0.1500 0 0.0800" rgba="0.950 0.400 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_2" type="box" size="0.1500 1.0000 0.1600" pos="0.4500 0 0.1600" rgba="0.850 0.300 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_3" type="box" size="0.1500 1.0000 0.2400" pos="0.7500 0 0.2400" rgba="0.950 0.400 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_4" type="box" size="0.1500 1.0000 0.3200" pos="1.0500 0 0.3200" rgba="0.850 0.300 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_5" type="box" size="0.1500 1.0000 0.4000" pos="1.3500 0 0.4000" rgba="0.950 0.400 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_6" type="box" size="0.1500 1.0000 0.4800" pos="1.6500 0 0.4800" rgba="0.850 0.300 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_7" type="box" size="0.1500 1.0000 0.5600" pos="1.9500 0 0.5600" rgba="0.950 0.400 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_8" type="box" size="0.1500 1.0000 0.6400" pos="2.2500 0 0.6400" rgba="0.850 0.300 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_9" type="box" size="0.1500 1.0000 0.7200" pos="2.5500 0 0.7200" rgba="0.950 0.400 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_10" type="box" size="0.1500 1.0000 0.8000" pos="2.8500 0 0.8000" rgba="0.850 0.300 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_11" type="box" size="0.1500 1.0000 0.8800" pos="3.1500 0 0.8800" rgba="0.950 0.400 0.300 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_5_12" type="box" size="0.1500 1.0000 0.9600" pos="3.4500 0 0.9600" rgba="0.850 0.300 0.200 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="platform_5" type="box" size="1.500 1.200 0.9600" pos="5.1000 0 0.9600" rgba="0.510 0.180 0.120 1.0" friction="0.90 0.005 0.0001" condim="3" /><geom name="curb_L_5" type="box" size="1.500 0.04 0.040" pos="5.1000 -1.240 1.960" rgba="0.850 0.300 0.200 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_R_5" type="box" size="1.500 0.04 0.040" pos="5.1000 1.240 1.960" rgba="0.850 0.300 0.200 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_back_5" type="box" size="0.06 1.280 0.040" pos="6.660 0 1.960" rgba="0.850 0.300 0.200 1.000" friction="0.4 0.001 0.0001" condim="3" /></body><body name="track_6_20cm" pos="0 9.500 0"><geom name="runway_6" type="box" size="2.000 1.200 0.001" pos="-2.000 0 0.001" material="runway_mat" contype="0" conaffinity="0" /><geom name="marker_L_6" type="cylinder" size="0.10 0.40" pos="-2.5 -1.320 0.40" rgba="0.650 0.200 0.750 1.000" contype="0" conaffinity="0" /><geom name="marker_R_6" type="cylinder" size="0.10 0.40" pos="-2.5 1.320 0.40" rgba="0.650 0.200 0.750 1.000" contype="0" conaffinity="0" /><geom name="banner_6" type="box" size="0.08 1.320 0.12" pos="-2.5 0 0.85" rgba="0.650 0.200 0.750 1.000" contype="0" conaffinity="0" /><geom name="step_6_1" type="box" size="0.1500 1.0000 0.1000" pos="0.1500 0 0.1000" rgba="0.750 0.300 0.850 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_2" type="box" size="0.1500 1.0000 0.2000" pos="0.4500 0 0.2000" rgba="0.650 0.200 0.750 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_3" type="box" size="0.1500 1.0000 0.3000" pos="0.7500 0 0.3000" rgba="0.750 0.300 0.850 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_4" type="box" size="0.1500 1.0000 0.4000" pos="1.0500 0 0.4000" rgba="0.650 0.200 0.750 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_5" type="box" size="0.1500 1.0000 0.5000" pos="1.3500 0 0.5000" rgba="0.750 0.300 0.850 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_6" type="box" size="0.1500 1.0000 0.6000" pos="1.6500 0 0.6000" rgba="0.650 0.200 0.750 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_7" type="box" size="0.1500 1.0000 0.7000" pos="1.9500 0 0.7000" rgba="0.750 0.300 0.850 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_8" type="box" size="0.1500 1.0000 0.8000" pos="2.2500 0 0.8000" rgba="0.650 0.200 0.750 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_9" type="box" size="0.1500 1.0000 0.9000" pos="2.5500 0 0.9000" rgba="0.750 0.300 0.850 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_10" type="box" size="0.1500 1.0000 1.0000" pos="2.8500 0 1.0000" rgba="0.650 0.200 0.750 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_11" type="box" size="0.1500 1.0000 1.1000" pos="3.1500 0 1.1000" rgba="0.750 0.300 0.850 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="step_6_12" type="box" size="0.1500 1.0000 1.2000" pos="3.4500 0 1.2000" rgba="0.650 0.200 0.750 1.000" friction="0.90 0.005 0.0001" condim="3" /><geom name="platform_6" type="box" size="1.500 1.200 1.2000" pos="5.1000 0 1.2000" rgba="0.390 0.120 0.450 1.0" friction="0.90 0.005 0.0001" condim="3" /><geom name="curb_L_6" type="box" size="1.500 0.04 0.040" pos="5.1000 -1.240 2.440" rgba="0.650 0.200 0.750 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_R_6" type="box" size="1.500 0.04 0.040" pos="5.1000 1.240 2.440" rgba="0.650 0.200 0.750 1.000" friction="0.4 0.001 0.0001" condim="3" /><geom name="curb_back_6" type="box" size="0.06 1.280 0.040" pos="6.660 0 2.440" rgba="0.650 0.200 0.750 1.000" friction="0.4 0.001 0.0001" condim="3" /></body></worldbody>
+
+  <actuator><motor name="FL_hip" joint="FL_hip_joint" ctrllimited="true" ctrlrange="-12 12" gear="1" /><motor name="FL_thigh" joint="FL_thigh_joint" ctrllimited="true" ctrlrange="-12 12" gear="1" /><motor name="FL_calf" joint="FL_calf_joint" ctrllimited="true" ctrlrange="-24 24" gear="1" /><motor name="FR_hip" joint="FR_hip_joint" ctrllimited="true" ctrlrange="-12 12" gear="1" /><motor name="FR_thigh" joint="FR_thigh_joint" ctrllimited="true" ctrlrange="-12 12" gear="1" /><motor name="FR_calf" joint="FR_calf_joint" ctrllimited="true" ctrlrange="-24 24" gear="1" /><motor name="RL_hip" joint="RL_hip_joint" ctrllimited="true" ctrlrange="-12 12" gear="1" /><motor name="RL_thigh" joint="RL_thigh_joint" ctrllimited="true" ctrlrange="-12 12" gear="1" /><motor name="RL_calf" joint="RL_calf_joint" ctrllimited="true" ctrlrange="-24 24" gear="1" /><motor name="RR_hip" joint="RR_hip_joint" ctrllimited="true" ctrlrange="-12 12" gear="1" /><motor name="RR_thigh" joint="RR_thigh_joint" ctrllimited="true" ctrlrange="-12 12" gear="1" /><motor name="RR_calf" joint="RR_calf_joint" ctrllimited="true" ctrlrange="-24 24" gear="1" /></actuator><sensor>
+    <jointpos name="FL_hip_position_sensor" joint="FL_hip_joint" noise="0.01" />
+    <jointpos name="FL_thigh_position_sensor" joint="FL_thigh_joint" noise="0.01" />
+    <jointpos name="FL_calf_position_sensor" joint="FL_calf_joint" noise="0.01" />
+    <jointpos name="FR_hip_position_sensor" joint="FR_hip_joint" noise="0.01" />
+    <jointpos name="FR_thigh_position_sensor" joint="FR_thigh_joint" noise="0.01" />
+    <jointpos name="FR_calf_position_sensor" joint="FR_calf_joint" noise="0.01" />
+    <jointpos name="RL_hip_position_sensor" joint="RL_hip_joint" noise="0.01" />
+    <jointpos name="RL_thigh_position_sensor" joint="RL_thigh_joint" noise="0.01" />
+    <jointpos name="RL_calf_position_sensor" joint="RL_calf_joint" noise="0.01" />
+    <jointpos name="RR_hip_position_sensor" joint="RR_hip_joint" noise="0.01" />
+    <jointpos name="RR_thigh_position_sensor" joint="RR_thigh_joint" noise="0.01" />
+    <jointpos name="RR_calf_position_sensor" joint="RR_calf_joint" noise="0.01" />
+
+    <jointvel name="FL_hip_velocity_sensor" joint="FL_hip_joint" noise="0.1" />
+    <jointvel name="FL_thigh_velocity_sensor" joint="FL_thigh_joint" noise="0.1" />
+    <jointvel name="FL_calf_velocity_sensor" joint="FL_calf_joint" noise="0.1" />
+    <jointvel name="FR_hip_velocity_sensor" joint="FR_hip_joint" noise="0.1" />
+    <jointvel name="FR_thigh_velocity_sensor" joint="FR_thigh_joint" noise="0.1" />
+    <jointvel name="FR_calf_velocity_sensor" joint="FR_calf_joint" noise="0.1" />
+    <jointvel name="RL_hip_velocity_sensor" joint="RL_hip_joint" noise="0.1" />
+    <jointvel name="RL_thigh_velocity_sensor" joint="RL_thigh_joint" noise="0.1" />
+    <jointvel name="RL_calf_velocity_sensor" joint="RL_calf_joint" noise="0.1" />
+    <jointvel name="RR_hip_velocity_sensor" joint="RR_hip_joint" noise="0.1" />
+    <jointvel name="RR_thigh_velocity_sensor" joint="RR_thigh_joint" noise="0.1" />
+    <jointvel name="RR_calf_velocity_sensor" joint="RR_calf_joint" noise="0.1" />
+
+    <actuatorfrc name="FL_hip_force_sensor" actuator="FL_hip" noise="0.01" />
+    <actuatorfrc name="FL_thigh_force_sensor" actuator="FL_thigh" noise="0.01" />
+    <actuatorfrc name="FL_calf_force_sensor" actuator="FL_calf" noise="0.01" />
+    <actuatorfrc name="FR_hip_force_sensor" actuator="FR_hip" noise="0.01" />
+    <actuatorfrc name="FR_thigh_force_sensor" actuator="FR_thigh" noise="0.01" />
+    <actuatorfrc name="FR_calf_force_sensor" actuator="FR_calf" noise="0.01" />
+    <actuatorfrc name="RL_hip_force_sensor" actuator="RL_hip" noise="0.01" />
+    <actuatorfrc name="RL_thigh_force_sensor" actuator="RL_thigh" noise="0.01" />
+    <actuatorfrc name="RL_calf_force_sensor" actuator="RL_calf" noise="0.01" />
+    <actuatorfrc name="RR_hip_force_sensor" actuator="RR_hip" noise="0.01" />
+    <actuatorfrc name="RR_thigh_force_sensor" actuator="RR_thigh" noise="0.01" />
+    <actuatorfrc name="RR_calf_force_sensor" actuator="RR_calf" noise="0.01" />
+
+    <accelerometer name="linear_acceleration" site="imu" noise="0.1" />
+    <gyro name="angular_velocity" site="imu" noise="0.1" />
+    
+    <gyro name="imu_ang_vel" site="imu" />
+    <velocimeter name="imu_lin_vel" site="imu" />
+
+    <framequat name="imu_orientation" objtype="site" objname="imu" noise="0.01" />
+
+    <framepos name="base_position" objtype="site" objname="base" noise="0.001" />
+    <framelinvel name="base_lin_vel" objtype="site" objname="base" noise="0.001" />
+    <frameangvel name="base_ang_vel" objtype="site" objname="base" noise="0.001" />
+    <framelinacc name="base_lin_acc" objtype="site" objname="base" noise="0.001" />
+    <frameangacc name="base_ang_acc" objtype="site" objname="base" noise="0.001" />
+
+    <force name="contact_force_FL" site="FL_foot" />
+    <force name="contact_force_FR" site="FR_foot" />
+    <force name="contact_force_RL" site="RL_foot" />
+    <force name="contact_force_RR" site="RR_foot" />
+  </sensor>
+
+  
+
+<keyframe><key name="home" qpos="-1.500 -9.500 0.365 1 0 0 0 0.00000 0.58060 -1.17160 0.00000 0.58060 -1.17160 0.00000 0.71670 -1.13420 0.00000 0.71670 -1.13420" /></keyframe></mujoco>
